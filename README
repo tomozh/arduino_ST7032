@@ -20,9 +20,9 @@ LiquidCrystal ライブラリのメンバ関数と互換性があるため、
 動作すると思われるもの
 
     SB1602E             Strawberry Linux
-	LCD16X2-I2C         aitendo
-	SPLC792-I2C-M       aitendo
-	16X2-SPLC792-I2C    aitendo
+    LCD16X2-I2C         aitendo
+    SPLC792-I2C-M       aitendo
+    16X2-SPLC792-I2C    aitendo
 
 
 -------------------------------------------------------------
