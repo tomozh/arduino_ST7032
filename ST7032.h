@@ -4,6 +4,10 @@
 #include <stdint.h>
 #include <Print.h>
 
+
+#define ST7032_I2C_DEFAULT_ADDR     0x3E
+
+
 // commands
 #define LCD_CLEARDISPLAY        0x01
 #define LCD_RETURNHOME          0x02
@@ -82,7 +86,7 @@
 
 class ST7032 : public Print {
 public:
-    ST7032();
+	ST7032(int i2c_addr = ST7032_I2C_DEFAULT_ADDR);
 
     void begin(uint8_t cols, uint8_t rows, uint8_t charsize = LCD_5x8DOTS);
 
@@ -133,6 +137,8 @@ private:
 
     uint8_t _numlines;
     uint8_t _currline;
+	
+	uint8_t _i2c_addr;
 };
 
 #endif  // __ST7032_H__

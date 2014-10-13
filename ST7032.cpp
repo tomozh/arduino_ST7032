@@ -7,6 +7,8 @@
   License: MIT
 
   History:
+    2014.10.13 コントラスト値のbit7がBONビットに影響する不具合を修正
+    2014.08.23 コンストラクタでI2Cアドレスを設定可能にした
     2013.05.21 1st release
   
  ------------------------
@@ -28,8 +30,6 @@
 #include "Arduino.h"
 #include <Wire.h>
 #include <avr/pgmspace.h>
-
-#define ST7032_I2C_ADDR     0x3E
 
 // private methods
 
@@ -64,9 +64,11 @@ void ST7032::extendFunctionSet() {
 
 // public methods
 
-ST7032::ST7032()
+
+ST7032::ST7032(int i2c_addr)
 : _displaycontrol(0x00)
 , _displaymode(0x00)
+, _i2c_addr((uint8_t)i2c_addr)
 {
 //  begin(16, 1);
 }
@@ -116,7 +118,7 @@ void ST7032::setContrast(uint8_t cont)
 {
   extendFunctionSet();
   command(LCD_EX_CONTRASTSETL | (cont & 0x0f));                     // Contrast set
-  command(LCD_EX_POWICONCONTRASTH | LCD_ICON_ON | LCD_BOOST_ON | ((cont >> 4) & 0x07)); // Power, ICON, Contrast control
+  command(LCD_EX_POWICONCONTRASTH | LCD_ICON_ON | LCD_BOOST_ON | ((cont >> 4) & 0x03)); // Power, ICON, Contrast control
   normalFunctionSet();
 }
 
@@ -217,7 +219,7 @@ void ST7032::createChar(uint8_t location, uint8_t charmap[]) {
 /*********** mid level commands, for sending data/cmds */
 
 void ST7032::command(uint8_t value) {
-  Wire.beginTransmission(ST7032_I2C_ADDR);
+  Wire.beginTransmission(_i2c_addr);
   Wire.write((uint8_t)0x00);
   Wire.write(value);
   Wire.endTransmission();
@@ -225,7 +227,7 @@ void ST7032::command(uint8_t value) {
 }
 
 size_t ST7032::write(uint8_t value) {
-  Wire.beginTransmission(ST7032_I2C_ADDR);
+  Wire.beginTransmission(_i2c_addr);
   Wire.write((uint8_t)0x40);
   Wire.write(value);
   Wire.endTransmission();
