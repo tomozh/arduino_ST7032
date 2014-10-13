@@ -15,8 +15,14 @@ LiquidCrystal ライブラリのメンバ関数と互換性があるため、
 
     SB1602B             Strawberry Linux
     SB0802G             Strawberry Linux
-    SB1602E             Strawberry Linux
     AQM0802A-RN-GBW     秋月電子通商
+
+動作すると思われるもの
+
+    SB1602E             Strawberry Linux
+	LCD16X2-I2C         aitendo
+	SPLC792-I2C-M       aitendo
+	16X2-SPLC792-I2C    aitendo
 
 
 -------------------------------------------------------------
