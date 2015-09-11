@@ -1,0 +1,12 @@
+{
+  "name": "ST7032",
+  "keywords": "display, i2c",
+  "description": "Library for ST7032i display",
+  "repository":
+  {
+    "type": "git",
+    "url": "https://github.com/tomozh/arduino_ST7032.git"
+  },
+  "frameworks": "arduino",
+  "platforms": "atmelavr"
+}
