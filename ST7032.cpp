@@ -29,7 +29,9 @@
 #include "ST7032.h"
 #include "Arduino.h"
 #include <Wire.h>
+#if defined(__AVR__)
 #include <avr/pgmspace.h>
+#endif
 
 // private methods
 
